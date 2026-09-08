@@ -6,12 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module.js';
-import { UserService } from './user/user.service.js';
 import { UserModule } from './user/user.module.js';
 
 @Module({
   imports: [
     CampaignsModule,
+    UserModule,
+    AuthModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),
@@ -41,10 +42,9 @@ import { UserModule } from './user/user.module.js';
         };
       }
     }),
-    AuthModule,
-    UserModule
+    AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [AppService],
 })
 export class AppModule { }
