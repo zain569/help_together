@@ -7,6 +7,15 @@ import { ConfigModule } from '@nestjs/config';
 import { ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module.js';
 import { UserModule } from './user/user.module.js';
+import { DonationModule } from './donation/donation.module.js';
+import { AdminModule } from './admin/admin.module.js';
+import { CausesModule } from './causes/causes.module.js';
+import { ServiceGiftsModule } from './service-gifts/service-gifts.module.js';
+import { ContactModule } from './contact/contact.module.js';
+import { FaqModule } from './faq/faq.module.js';
+import { TestimonialModule } from './testimonial/testimonial.module.js';
+import { CloudinaryModule } from './cloudinary/cloudinary.module.js';
+import { StripeModule } from './stripe/stripe.module.js';
 
 @Module({
   imports: [
@@ -42,7 +51,16 @@ import { UserModule } from './user/user.module.js';
         };
       }
     }),
-    AuthModule
+    AuthModule,
+    DonationModule,
+    AdminModule,
+    CausesModule,
+    ServiceGiftsModule,
+    ContactModule,
+    FaqModule,
+    TestimonialModule,
+    CloudinaryModule,
+    StripeModule
   ],
   controllers: [AppController],
   providers: [AppService],

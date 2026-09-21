@@ -1,14 +1,18 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller.js';
-import {RegisterUserService } from './auth.service.js';
+import { LoginAuthService, ProfileAuthService, RegisterUserService } from './auth.service.js';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { RegisterService } from '../user/user.service.js';
 import { UserModule } from '../user/user.module.js';
+import { AuthGuard } from './guards/auth.guard.js';
+import { CloudinaryService } from '../cloudinary/cloudinary.service.js';
+import { CloudinaryModule } from '../cloudinary/cloudinary.module.js';
 
 @Module({
+  exports:[AuthGuard, JwtModule],
   imports:[
     UserModule,
+    forwardRef(() => CloudinaryModule),
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
@@ -20,6 +24,6 @@ import { UserModule } from '../user/user.module.js';
     })
   ],
   controllers: [AuthController],
-  providers: [RegisterUserService]
+  providers: [RegisterUserService, LoginAuthService, ProfileAuthService, AuthGuard]
 })
 export class AuthModule {}

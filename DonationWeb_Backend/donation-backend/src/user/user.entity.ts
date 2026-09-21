@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import type { Relation } from "typeorm";
+import { DonationEntity } from "../donation/entities/donation.entity.js";
 
 export enum UserRole {
   USER = 'user',
@@ -23,6 +25,9 @@ export class User {
 
     @Column()
     password: string;
+
+    @OneToMany(()=> DonationEntity, (donation)=> donation.user)
+    donations: Relation<DonationEntity[]>;
 
     @Column({
         type: 'enum',

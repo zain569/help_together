@@ -1,7 +1,7 @@
 import { IsEmail, IsIn, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 import { UserRole } from "../../user/user.entity.js";
 
-export class RegisterDto{
+export class RegisterDto {
     @IsNotEmpty()
     @IsString()
     firstname: string;
@@ -19,7 +19,11 @@ export class RegisterDto{
     @MinLength(8)
     password: string;
 
-    @IsIn(['user', 'admin', 'organization'])
+    @IsOptional()
+    @IsString()
+    profileimage: string;
+
+    @IsIn(['user'])
     role: UserRole;
 
     @IsOptional()
